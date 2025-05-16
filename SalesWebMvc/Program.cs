@@ -20,10 +20,10 @@ app.UseAuthorization();
 
 app.MapStaticAssets();
 
+// Definição de padrão(pattern) do controlador da rota
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
-
 
 app.Run();
