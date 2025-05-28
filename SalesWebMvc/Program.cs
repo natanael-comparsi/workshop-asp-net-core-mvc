@@ -1,4 +1,10 @@
+ï»¿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using SalesWebMvc.Data;
 var builder = WebApplication.CreateBuilder(args);
+// ConfiguraÃ§Ã£o do serviÃ§o do SQL Server
+builder.Services.AddDbContext<SalesWebMvcContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SalesWebMvcContext") ?? throw new InvalidOperationException("Connection string 'SalesWebMvcContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -20,7 +26,7 @@ app.UseAuthorization();
 
 app.MapStaticAssets();
 
-// Definição de padrão(pattern) do controlador da rota
+// Definiï¿½ï¿½o de padrï¿½o(pattern) do controlador da rota
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
