@@ -4,17 +4,25 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using SalesWebMvc.Data;
 using System.Configuration;
+
 var builder = WebApplication.CreateBuilder(args);
+
 // Configuração do provider do MySQL a partir da definição do DbContext
 builder.Services.AddDbContext<SalesWebMvcContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("SalesWebMvcContext"),
                      new MySqlServerVersion(new Version(8, 0, 42)), // Deve ser inserida a versão do MySQL utilizada
                      mysqlOptions => mysqlOptions.MigrationsAssembly("SalesWebMvc")));
 
+// Registra o serviço 'SeedingService' no sistema de injeção de dependencia da aplicação
+builder.Services.AddScoped<SeedingService>();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+// Chama o método para popular o banco de dados caso a base de dados não esteja populada ainda
+app.Services.CreateScope().ServiceProvider.GetRequiredService<SeedingService>().Seed();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
