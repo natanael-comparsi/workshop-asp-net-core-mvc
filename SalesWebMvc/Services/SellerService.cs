@@ -24,5 +24,13 @@ namespace SalesWebMvc.Services
             // Em outras palavras acessa a fonte de dados relacionada a tabela de vendedores e converte isto em uma lista
             return _context.Seller.ToList();
         }
+
+        // Método para inserir o objeto 'Seller' no banco de dados por meio do 'Entity Framework'
+        public void Insert(Seller obj)
+        {
+            _context.Add(obj);
+            // Confirma a operação no banco de dados
+            _context.SaveChanges();
+        }
     }
 }

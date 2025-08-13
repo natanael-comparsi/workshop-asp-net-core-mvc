@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using SalesWebMvc.Models;
 using SalesWebMvc.Services;
 
 namespace SalesWebMvc.Controllers
@@ -25,6 +26,25 @@ namespace SalesWebMvc.Controllers
             var list = _sellerService.FindAll();
             // Vai gerar um IActionResult contendo essa lista passada como parametro
             return View(list);
+        }
+
+        // Retorna a view corresponte a ação create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // 'Notation' para indicar que esta ação é uma ação de 'POST'
+        [HttpPost]
+        // 'Notation' para previnir ataques 'Cross-Site Request Forgery' (CSRF)
+        [ValidateAntiForgeryToken]
+        // Método 'Create' para inserir um vendedor no banco de dados e redirecionar para a pagina inicial da aplicação
+        public IActionResult Create(Seller seller)
+        {
+            // Insere o vendedor criado
+            _sellerService.Insert(seller);
+            // Redireciona para a ação 'Index' que seria para a pagina principal
+            return RedirectToAction(nameof(Index));
         }
     }
 }
