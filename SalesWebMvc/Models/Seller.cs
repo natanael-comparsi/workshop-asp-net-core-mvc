@@ -13,6 +13,7 @@ namespace SalesWebMvc.Models
         public double BaseSalary { get; set; }
         // Associação com a classe Department 
         public Department Department { get; set; }
+        public int DepartmentId { get; set; }
         // Associação com a classe SalesRecord e instanciação da lista de vendedores
         public ICollection<SalesRecord> Sales { get; set; } = new List<SalesRecord>();
 

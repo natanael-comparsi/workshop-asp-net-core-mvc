@@ -28,7 +28,7 @@ namespace SalesWebMvc.Controllers
             return View(list);
         }
 
-        // Retorna a view corresponte a ação create
+        // Retorna a view correspondente a ação create
         public IActionResult Create()
         {
             return View();
@@ -36,7 +36,7 @@ namespace SalesWebMvc.Controllers
 
         // 'Notation' para indicar que esta ação é uma ação de 'POST'
         [HttpPost]
-        // 'Notation' para previnir ataques 'Cross-Site Request Forgery' (CSRF)
+        // 'Notation' para prevenir ataques 'Cross-Site Request Forgery' (CSRF)
         [ValidateAntiForgeryToken]
         // Método 'Create' para inserir um vendedor no banco de dados e redirecionar para a pagina inicial da aplicação
         public IActionResult Create(Seller seller)

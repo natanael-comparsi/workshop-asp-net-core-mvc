@@ -28,6 +28,8 @@ namespace SalesWebMvc.Services
         // Método para inserir o objeto 'Seller' no banco de dados por meio do 'Entity Framework'
         public void Insert(Seller obj)
         {
+            // Pega o primeiro departamento que existe no banco de dados e associa com o vendedor
+            obj.Department = _context.Department.First();
             _context.Add(obj);
             // Confirma a operação no banco de dados
             _context.SaveChanges();
