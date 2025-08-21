@@ -16,9 +16,10 @@ builder.Services.AddDbContext<SalesWebMvcContext>(options =>
 
 // Registra o serviço 'SeedingService' no sistema de injeção de dependencia da aplicação
 builder.Services.AddScoped<SeedingService>();
-
 // Registra o serviço 'SellerService' no sistema de injeção de dependencia da aplicação
 builder.Services.AddScoped<SellerService>();
+// Registra o serviço 'DepartmentService' no sistema de injeção de dependencia da aplicação
+builder.Services.AddScoped<DepartmentService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
